@@ -1,0 +1,105 @@
+/**
+ * Copyright (c) 2015 Bosch Software Innovations GmbH and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
+package org.eclipse.hawkbit.repository.builder;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+import org.eclipse.hawkbit.repository.model.BaseEntity;
+import org.eclipse.hawkbit.repository.model.NamedEntity;
+import org.eclipse.hawkbit.repository.model.Target;
+import org.eclipse.hawkbit.repository.model.TargetUpdateStatus;
+
+/**
+ * Builder to create a new {@link Target} entry. Defines all fields that can be
+ * set at creation time. Other fields are set by the repository automatically,
+ * e.g. {@link BaseEntity#getCreatedAt()}.
+ *
+ */
+public interface TargetCreate {
+
+    /**
+     * @param controllerId
+     *            for {@link Target#getControllerId()}
+     * @return updated builder instance
+     */
+    TargetCreate controllerId(@Size(min = 1, max = Target.CONTROLLER_ID_MAX_SIZE) @NotNull String controllerId);
+
+    /**
+     * @param name
+     *            for {@link Target#getName()} filled with
+     *            {@link #controllerId(String)} as default if not set explicitly
+     * @return updated builder instance
+     */
+    TargetCreate name(@Size(min = 1, max = NamedEntity.NAME_MAX_SIZE) @NotNull String name);
+
+    /**
+     * @param description
+     *            for {@link Target#getDescription()}
+     * @return updated builder instance
+     */
+    TargetCreate description(@Size(max = NamedEntity.DESCRIPTION_MAX_SIZE) String description);
+
+    /**
+     * @param targetTypeId
+     *            for {@link Target#getTargetType()}
+     * @return updated builder instance
+     */
+    TargetCreate targetType(Long targetTypeId);
+
+    /**
+     * @param securityToken
+     *            for {@link Target#getSecurityToken()} is generated with a
+     *            random sequence as default if not set explicitly
+     * @return updated builder instance
+     */
+    TargetCreate securityToken(@Size(min = 1, max = Target.SECURITY_TOKEN_MAX_SIZE) @NotNull String securityToken);
+
+    /**
+     * @param lastTargetQuery
+     *            for {@link Target#getLastTargetQuery()}
+     * @return updated builder instance
+     */
+    TargetCreate lastTargetQuery(Long lastTargetQuery);
+
+    /**
+     * @param status
+     *            for {@link Target#getUpdateStatus()} is
+     *            {@link TargetUpdateStatus#UNKNOWN} as default if not set
+     *            explicitly
+     * @return updated builder instance
+     */
+    TargetCreate status(@NotNull TargetUpdateStatus status);
+
+    /**
+     * @param serialNumber
+     *            for {@link Target#getSerialNumber()}
+     * @return updated builder instance
+     */
+    TargetCreate serialNumber(@Size(min = 1, max = Target.SERIAL_NUMBER_MAX_SIZE) @NotNull String serialNumber);
+
+    /**
+     * @param vehicleModelId
+     *            for {@link Target#getVehicleModelId()}
+     * @return updated builder instance
+     */
+    TargetCreate vehicleModelId(Long vehicleModelId);
+
+    /**
+     * @param vin
+     *            for {@link Target#getVin()}
+     * @return updated builder instance
+     */
+    TargetCreate vin(@Size(min = 1, max = Target.VIN_MAX_SIZE) @NotNull String vin);
+
+    /**
+     * @return peek on current state of {@link Target} in the builder
+     */
+    Target build();
+
+}

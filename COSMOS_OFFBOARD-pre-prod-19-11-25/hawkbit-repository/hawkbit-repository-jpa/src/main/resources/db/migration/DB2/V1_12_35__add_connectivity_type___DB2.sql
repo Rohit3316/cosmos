@@ -1,0 +1,1 @@
+ALTER TABLE sp_rollout ADD COLUMN connectivity_type INTEGER NOT NULL DEFAULT 0;

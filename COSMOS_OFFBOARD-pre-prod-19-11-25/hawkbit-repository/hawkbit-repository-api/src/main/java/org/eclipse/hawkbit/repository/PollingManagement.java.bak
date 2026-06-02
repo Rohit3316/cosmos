@@ -1,0 +1,86 @@
+/**
+ * Copyright (c) 2021 Bosch.IO GmbH and others.
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
+package org.eclipse.hawkbit.repository;
+
+import org.eclipse.hawkbit.im.authentication.SpPermission;
+import org.eclipse.hawkbit.repository.builder.TargetTypeCreate;
+import org.eclipse.hawkbit.repository.builder.TargetTypeUpdate;
+import org.eclipse.hawkbit.repository.model.Polling;
+import org.eclipse.hawkbit.repository.model.TargetType;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+import org.springframework.security.access.prepost.PreAuthorize;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Management service for {@link Polling}s.
+ *
+ */
+public interface PollingManagement {
+
+    /**
+     * @return total count
+     */
+    @PreAuthorize(SpPermission.SpringEvalExpressions.HAS_AUTH_READ_TARGET)
+    long count();
+
+
+    /**
+     * @param create
+     *            TargetTypeCreate
+     * @return targetType
+     */
+//    @PreAuthorize(SpPermission.SpringEvalExpressions.HAS_AUTH_CREATE_TARGET)
+    Polling create(@NotNull Polling create);
+
+    /**
+     * @param creates
+     *            List of TargetTypeCreate
+     * @return List of targetType
+     */
+    @PreAuthorize(SpPermission.SpringEvalExpressions.HAS_AUTH_CREATE_TARGET)
+    List<Polling> create(@NotEmpty @Valid Collection<Polling> creates);
+
+
+
+    /**
+     * @param pageable
+     *            Page
+     * @return TargetType page
+     */
+    @PreAuthorize(SpPermission.SpringEvalExpressions.HAS_AUTH_READ_TARGET)
+    Slice<Polling> findAll(@NotNull Pageable pageable);
+
+    /**
+     * @param pageable
+     *            Page
+     * @param rsqlParam
+     *            query param
+     * @return Target type
+     */
+    @PreAuthorize(SpPermission.SpringEvalExpressions.HAS_AUTH_READ_TARGET)
+    Page<Polling> findByRsql(@NotNull Pageable pageable, @NotEmpty String rsqlParam);
+
+    /**
+     * @param id
+     *            Target type ID
+     * @return Target Type
+     */
+    @PreAuthorize(SpPermission.SpringEvalExpressions.HAS_AUTH_READ_TARGET)
+    Optional<Polling> get(long id);
+
+
+}
