@@ -1,0 +1,1 @@
+ALTER TABLE sp_action ADD COLUMN vehicle_log_level INTEGER;

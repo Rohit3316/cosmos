@@ -1,0 +1,1 @@
+ALTER TABLE sp_distribution_set ADD COLUMN software_downgrade_enabled BOOLEAN NOT NULL DEFAULT false;

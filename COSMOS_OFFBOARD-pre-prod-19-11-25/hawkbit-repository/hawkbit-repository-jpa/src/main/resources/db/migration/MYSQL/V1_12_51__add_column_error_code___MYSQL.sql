@@ -1,0 +1,1 @@
+ALTER TABLE sp_action_status ADD COLUMN error_code VARCHAR(50);

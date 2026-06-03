@@ -1,0 +1,2 @@
+ALTER TABLE sp_rollout
+    ADD COLUMN IF NOT EXISTS actualStartDate BIGINT NULL;

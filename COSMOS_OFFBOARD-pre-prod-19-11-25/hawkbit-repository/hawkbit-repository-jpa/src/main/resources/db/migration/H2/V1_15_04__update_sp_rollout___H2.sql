@@ -1,0 +1,3 @@
+ALTER TABLE sp_rollout ADD COLUMN IF NOT EXISTS type VARCHAR(4);
+ALTER TABLE sp_rollout ADD COLUMN IF NOT EXISTS update_action VARCHAR(20);
+ALTER TABLE sp_rollout ADD COLUMN IF NOT EXISTS update_action_uninstall_version VARCHAR(4096);
