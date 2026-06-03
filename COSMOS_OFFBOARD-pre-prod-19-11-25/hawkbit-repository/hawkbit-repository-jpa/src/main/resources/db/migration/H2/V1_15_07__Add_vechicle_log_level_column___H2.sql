@@ -1,1 +1,0 @@
-ALTER TABLE sp_rollout ADD COLUMN vehicle_log_level INTEGER DEFAULT 4;
